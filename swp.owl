@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#"
+     xml:base="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#hasSubbed -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#hasSubbed">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#wasSubbedBy"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Fansub-Group"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#soundsLike -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#soundsLike">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#soundsLike"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Videogame"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#wasSubbedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#wasSubbedBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Fansub-Group"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#gotRatedInGermanyWith -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#gotRatedInGermanyWith">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#gotRatedInternationallyWith -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#gotRatedInternationallyWith">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#isLicensedinGermany -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#isLicensedinGermany">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Anime">
+        <rdfs:comment>This is the class of all Animes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Fansub-Group -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Fansub-Group">
+        <rdfs:comment>This is the class of all fansub-groups.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Videogame -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Videogame">
+        <rdfs:comment>This is the class of all videogames.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
