@@ -34,18 +34,17 @@ public class WebCrawler {
         }
     }
 
-    private Hashtable<String, List<String>> generateAnisearchHashtable(Elements names, Elements ratings) {
+    private Hashtable<String, List<String>> generateAnisearchHashtable(Elements pagenames, Elements pageratings) {
         Hashtable<String, List<String>> anisearchNamesAndRatings = new Hashtable<String, List<String>>();
-        for(int i=0; i<=names.size()-1; i++) {
-            if (ratings.eq(i).text().contains("(")) {
-                String[] ratingbig = ratings.eq(i).text().split("\\s+");
-                String commarating = ratingbig[0];
+        for(int i=0; i<=pagenames.size()-1; i++) {
+            if (pageratings.eq(i).text().contains("(")) {
+                String commarating = pageratings.eq(i).text().split("\\s+")[0];
                 String[] correctrating = commarating.split(Pattern.quote(","));
                 String pointrating = correctrating[0] + "." + correctrating[1];
                 List<String> anilist = new ArrayList<String>();
                 anilist.add(Double.toString(Double.valueOf(pointrating)*2));
-                anilist.add(names.eq(i).attr("abs:href"));
-                anisearchNamesAndRatings.put(names.eq(i).text(), anilist);
+                anilist.add(pagenames.eq(i).attr("abs:href"));
+                anisearchNamesAndRatings.put(pagenames.eq(i).text(), anilist);
             }
         }
         return anisearchNamesAndRatings;
@@ -69,16 +68,15 @@ public class WebCrawler {
         }
     }
 
-    private Hashtable<String, List<String>> generateAnidbHashtable(Elements names, Elements ratings) {
+    private Hashtable<String, List<String>> generateAnidbHashtable(Elements pagenames, Elements pageratings) {
         Hashtable<String, List<String>> anidbNamesAndRatings = new Hashtable<String, List<String>>();
-        for (int i=0; i<=names.size()-1; i++) {
-            if (!ratings.eq(i).text().contains("N")) {
-                String[] ratingbig = ratings.eq(i).text().split("\\s+");
-                String pointrating = ratingbig[0];
+        for (int i=0; i<=pagenames.size()-1; i++) {
+            if (!pageratings.eq(i).text().contains("N")) {
+                String pointrating = pageratings.eq(i).text().split("\\s+")[0];
                 List<String> anilist = new ArrayList<String>();
                 anilist.add(pointrating);
-                anilist.add(names.eq(i).attr("abs:href"));
-                anidbNamesAndRatings.put(names.eq(i).text(), anilist);
+                anilist.add(pagenames.eq(i).attr("abs:href"));
+                anidbNamesAndRatings.put(pagenames.eq(i).text(), anilist);
             }
         }
         return anidbNamesAndRatings;
@@ -105,46 +103,46 @@ public class WebCrawler {
         }
     }
 
-    private Hashtable<String, List<String>> generateFansubdbHashtable(Elements names, Elements license, Elements fansubs) {
+    private Hashtable<String, List<String>> generateFansubdbHashtable(Elements pagenames, Elements pagelicense, Elements pagefansubs) {
         Hashtable<String, List<String>> fansubdbtable = new Hashtable<String, List<String>>();
         String licenseinfo;
-        for (int i=0; i<=names.size()-1; i++) {
+        for (int i=0; i<=pagenames.size()-1; i++) {
             licenseinfo = "unlicensed";
-            if (license.eq(i).text().equals("lizenziert")) {
+            if (pagelicense.eq(i).text().equals("lizenziert")) {
                 licenseinfo = "licensed";
             }
             List<String> grouplist = new ArrayList<String>();
             grouplist.add(licenseinfo);
-            grouplist = updateGrouplist(fansubs.eq(i), grouplist);
+            grouplist = updateGrouplist(pagefansubs.eq(i), grouplist);
 
             //Handle multiple entries of same anime name, override license and add additional groups to list
-            if (!fansubdbtable.containsKey(names.eq(i).text())) {
-                fansubdbtable.put(names.eq(i).text(), grouplist);
+            if (!fansubdbtable.containsKey(pagenames.eq(i).text())) {
+                fansubdbtable.put(pagenames.eq(i).text(), grouplist);
             } else {
-                List<String> templist = fansubdbtable.get(names.eq(i).text());
+                List<String> templist = fansubdbtable.get(pagenames.eq(i).text());
                 if (licenseinfo.equals("licensed")) {
                     templist.set(0, "licensed");
                 }
-                templist = updateGrouplist(fansubs.eq(i), templist);
-                fansubdbtable.put(names.eq(i).text(), templist);
+                templist = updateGrouplist(pagefansubs.eq(i), templist);
+                fansubdbtable.put(pagenames.eq(i).text(), templist);
             }
         }
         fansubdbtable = safecheckFansubdbHashtable(fansubdbtable);
         return fansubdbtable;
     }
 
-    private List<String> updateGrouplist (Elements fansubs, List<String> grouplist) {
-        if (!fansubs.text().equals("")) {
-            if (fansubs.text().contains(",")) {
-                String[] groups = fansubs.text().replaceAll("\\s+","").split(Pattern.quote(","));
-                String[] urls = fansubs.html().replaceAll("\\s+","").split(Pattern.quote(","));
+    private List<String> updateGrouplist (Elements pagefansubs, List<String> grouplist) {
+        if (!pagefansubs.text().equals("")) {
+            if (pagefansubs.text().contains(",")) {
+                String[] groups = pagefansubs.text().replaceAll("\\s+","").split(Pattern.quote(","));
+                String[] urls = pagefansubs.html().replaceAll("\\s+","").split(Pattern.quote(","));
                 for (int j=0; j<=groups.length-1; j++) {
                     grouplist.add(groups[j]);
                     grouplist.add(urls[j].split(Pattern.quote("\""))[1]);
                 }
             } else {
-                grouplist.add(fansubs.text());
-                grouplist.add(fansubs.html().replaceAll("\\s+","").split(Pattern.quote("\""))[1]);
+                grouplist.add(pagefansubs.text());
+                grouplist.add(pagefansubs.html().replaceAll("\\s+","").split(Pattern.quote("\""))[1]);
             }
         }
         return grouplist;
@@ -196,19 +194,19 @@ public class WebCrawler {
         }
     }
 
-    private Hashtable<String, List<String>> generateGeneralFansubHashtable(Elements names, Elements fansubs) {
+    private Hashtable<String, List<String>> generateGeneralFansubHashtable(Elements pagenames, Elements pagefansubs) {
         Hashtable<String, List<String>> fansubtable = new Hashtable<String, List<String>>();
-        for (int i=0; i<=names.size()-1; i++) {
+        for (int i=0; i<=pagenames.size()-1; i++) {
             List<String> grouplist = new ArrayList<String>();
-            grouplist = updateGeneralGrouplist(fansubs.eq(i), grouplist);
+            grouplist = updateGeneralGrouplist(pagefansubs.eq(i), grouplist);
 
             //Handle multiple entries of same anime name, override license and add additional groups to list
-            if (!fansubtable.containsKey(names.eq(i).text())) {
-                fansubtable.put(names.eq(i).text(), grouplist);
+            if (!fansubtable.containsKey(pagenames.eq(i).text())) {
+                fansubtable.put(pagenames.eq(i).text(), grouplist);
             } else {
-                List<String> templist = fansubtable.get(names.eq(i).text());
-                templist = updateGeneralGrouplist(fansubs.eq(i), templist);
-                fansubtable.put(names.eq(i).text(), templist);
+                List<String> templist = fansubtable.get(pagenames.eq(i).text());
+                templist = updateGeneralGrouplist(pagefansubs.eq(i), templist);
+                fansubtable.put(pagenames.eq(i).text(), templist);
             }
         }
         return fansubtable;

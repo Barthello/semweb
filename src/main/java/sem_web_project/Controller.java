@@ -36,7 +36,7 @@ public class Controller {
 
     public void generateRDF(){
         OntModel m = ModelFactory.createOntologyModel();
-        m.read("/home/flarestar/IdeaProjects/SemanticWebProject/swp.owl");
+        m.read("swp.owl");
         List<String> tempgrouplist = new ArrayList<String>();
 
         OntClass videogame = m.getOntClass("http://www.semanticweb.org/flarestar/ontologies/2017/3/swp#Videogame");
@@ -122,7 +122,7 @@ public class Controller {
             }
         }
 
-        String fileName = "/home/flarestar/IdeaProjects/SemanticWebProject/swp.rdf";
+        String fileName = "swp.rdf";
         FileWriter out = null;
         try {
             out = new FileWriter( fileName );
@@ -151,7 +151,7 @@ public class Controller {
         FileOutputStream out_file = null;
 
         try {
-            out_file = new FileOutputStream("/home/flarestar/IdeaProjects/SemanticWebProject/anidb.obj");
+            out_file = new FileOutputStream("anidb.obj");
             out = new ObjectOutputStream(out_file);
 
             out.writeObject(root);
@@ -187,12 +187,10 @@ public class Controller {
     }
 
     public void createTDBdataset() {
-        Dataset dataset = TDBFactory.createDataset("/home/flarestar/IdeaProjects/SemanticWebProject/tdb");
+        Dataset dataset = TDBFactory.createDataset("tdb");
         Model tdb = dataset.getNamedModel("graph");
-
-        //FileManager.get().readModel(tdb, "/home/flarestar/IdeaProjects/SemanticWebProject/swp.rdf");
         try {
-            tdb.read(new FileInputStream("/home/flarestar/IdeaProjects/SemanticWebProject/swp.rdf"),null,"TTL");
+            tdb.read(new FileInputStream("swp.rdf"),null,"TTL");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -201,7 +199,7 @@ public class Controller {
     }
 
     public void tdbQuery(String querystring) {
-        Dataset dataset = TDBFactory.createDataset("/home/flarestar/IdeaProjects/SemanticWebProject/tdb");
+        Dataset dataset = TDBFactory.createDataset("tdb");
 
         /*
         Iterator<String> graphNames = dataset.listNames();
