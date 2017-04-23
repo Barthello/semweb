@@ -200,14 +200,6 @@ public class Controller {
 
     public void tdbQuery(String querystring) {
         Dataset dataset = TDBFactory.createDataset("tdb");
-
-        /*
-        Iterator<String> graphNames = dataset.listNames();
-        while (graphNames.hasNext()) {
-            String graphName = graphNames.next();
-            System.out.println(graphName);
-        }
-        */
         Query query = QueryFactory.create(querystring);
         QueryExecution qexec = QueryExecutionFactory.create(query, dataset);
         ResultSet results = qexec.execSelect();
