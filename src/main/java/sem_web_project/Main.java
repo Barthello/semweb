@@ -13,7 +13,5 @@ public class Main {
         //controller.serialize(controller.wc.getHashtableIntRatings());
         //controller.generateRDF();
         //controller.createTDBdataset();
-        controller.tdbQuery("SELECT ?Anime, ?Fansub-Group, ?Videogame {graph ?graph {?s ?p ?o}}");
-        //controller.tdbQuery("SELECT ?Anime ?Fansub-Group ?Videogame where {?Anime swp#wasSubbedBy ?Fansub-Group.}");
     }
 }

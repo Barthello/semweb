@@ -185,7 +185,8 @@ public class Controller {
 
         return o;
     }
-
+    //Verworfen: Stattdessen Stardog verwendet
+    /*
     public void createTDBdataset() {
         Dataset dataset = TDBFactory.createDataset("tdb");
         Model tdb = dataset.getNamedModel("graph");
@@ -205,4 +206,5 @@ public class Controller {
         ResultSet results = qexec.execSelect();
         ResultSetFormatter.out(results);
     }
+    */
 }
